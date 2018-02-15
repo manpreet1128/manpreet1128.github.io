@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+
+<head>
+<link href="https://fonts.googleapis.com/css?family=Berkshire+Swash" rel='stylesheet' type='text/css'>
+<link href="https://fonts.googleapis.com/css?family=Abril+Fatface" rel="stylesheet">
+<script src="/assets/jquery.js"></script>
+<style>
+body {
+   text-align:center;
+   font-family:'Abril Fatface';
+   font-size:30px;
+   background:#e44;
+}
+button {
+   margin:40px;
+}
+input {
+   font-size:30px;
+}
+.fill {
+   background:white;
+   color:Pink;
+   border-bottom:2px black solid;
+   font-family: 'Berkshire Swash';
+   padding: 0 6px;
+   margin:4px
+}
+</style>
+</head>
+
+<body>
+<div class="prompt"></div>
+<button>Next</button>
+<script>
+// List of prompts for the user
+var prompts = [
+	'Type your name',
+	'Type an adjective',
+	'Type a noun',
+	'Type a sentence',
+	'Type a good thing about them',
+	'Type a conflict',
+	'Type a emotional line',
+	'Type a Confident',
+	'Type a goodbye',
+	'Type a ending'
+   ];
+
+var answers=[];
+// Keep track of current prompt we're on
+var currentPrompt = 0;
+
+// A function that will call the next prompt
+var nextPrompt = function() {
+  //if there's no answer in the form
+  if (currentPrompt != 0){
+    answers.push($('input').val());
+  }
+	// if there is a next prompt
+	if (currentPrompt < prompts.length) {
+		// put first prompt in all html elements with class 
+		$('.prompt').html(prompts[currentPrompt] +'<br><input type="text">');
+		// move the next prompt into variable currentPrompt 
+		currentPrompt = currentPrompt + 1;
+	}
+	//or else if we're at the end of the array
+	else {
+		// put a new message into the html.
+		showFinal();
+	}
+}
+
+//puts user answers into HTML
+var showFinal = function() {
+  $('.prompt').html('This is the story of <span class="fill">'+answers[0]+'</span> and the <span class="fill">'+answers[1]+'</span> <span class="fill">'+answers[2]+'</span> In this story <span class="fill">'+answers[3]+'</span>. They were best friends since 1st Grade <span class="fill">'+answers[4]+'</span>. Steven found out that tommorow <span class="fill">'+answers[5]+'</span>. He was upset how he wont be able to <span class="fill">'+answers[6]+'</span>. But lucy Told him <span class="fill">'+answers[7]+'</span>. The next morning The Sosa Family were packing and getting ready to leave Steven comes up to Lucy and hugs her and says <span class="fill">'+answers[8]+'</span>.After 4 years they both meet up and still hangs out the way they used too. <span class="fill">'+answers[9]+'</span> The end.');
+  //and the hide the button
+  $('button').hide();
+}
+// run nextPrompt function when button is clicked
+$('button').click(function() {
+	nextPrompt();
+});
+
+// Show the first prompt as soon as js loads
+nextPrompt();
+</script>
+
+</body>
